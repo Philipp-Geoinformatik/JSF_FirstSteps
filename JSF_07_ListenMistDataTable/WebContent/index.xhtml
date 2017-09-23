@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+	<link rel="stylesheet" href="css/bootstrap.css"></link>
+	<link rel="stylesheet" href="css/bootstrap-theme.css"></link>
+	<link rel="stylesheet" href="css/labelSpacer.css"></link>
+</h:head>
+<body>
+	<script src="js/jquery3.2.1.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/npm.js"></script>
+
+	<div class="container">
+		<div class="jumbotron">
+			<h1>Ihre Kontaktaufnahme</h1>
+			<div>Bitte f&uuml;llen Sie das Formular aus</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-12">
+				<h:dataTable value="#{locationHandler.locations}" var="location" styleClass="table table-striped">
+					<h:column>
+						<f:facet name="header">Name</f:facet> #{location.name}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Adresse</f:facet>
+						<h:outputText value="#{location.address}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Email</f:facet>
+						<h:outputLink value="mailto:#{location.email}">#{location.email}</h:outputLink>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Telephone</f:facet>
+						#{location.telephone}
+					</h:column>
+				</h:dataTable>
+			</div>
+		</div>
+
+		<h:form>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<label>Welches Thema interesiert Sie am meisten?</label>
+					</div>
+					<div class="checkBox">
+						<h:selectBooleanCheckbox value="#{contactData.topicDev}" />
+						Development
+					</div>
+					<div class="checkBox">
+						<h:selectBooleanCheckbox value="#{contactData.topicTraining}" />
+						Training
+					</div>
+					<div class="checkBox">
+						<h:selectBooleanCheckbox value="#{contactData.topicConsulting}" />
+						Consulting
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<h:outputLabel value="Anrede" for="salutationSelection" />
+				<h:selectOneMenu id="salutationSelection"
+					value="#{contactData.salutation}" styleClass="form-control">
+					<f:selectItems value="#{salutationHandler.salutations}" />
+				</h:selectOneMenu>
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Ihr Nachname" for="txtLastName" />
+				<h:inputText value="#{contactData.lastName}" id="txtLastName"
+					styleClass="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Vorname" for="txtFirstName" />
+				<h:inputText value="#{contactData.firstName}" id="txtFirstName"
+					styleClass="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="E-Mail" for="txtEmail" />
+				<h:inputText value="#{contactData.email}" id="txtEmail"
+					styleClass="form-control" />
+			</div>
+			<div class="form-group">
+				<h:outputLabel value="Telefon" for="txtTel" />
+				<h:inputText value="#{contactData.phone}" id="txtTel"
+					styleClass="form-control" />
+			</div>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="form-group">
+						<label class="label">Wie sollen wir sie kontaktieren?</label>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="form-group">
+				<h:outputLabel value="Nachricht" for="txtNachricht" />
+				<h:inputTextarea value="#{contactData.message}" id="txtNachricht"
+					rows="8" styleClass="form-control" />
+			</div>
+
+			<div class="form-group">
+				<h:selectOneRadio value="#{contactData.contactKind}"
+					layout="pageDirection" styleClass="labelSpacer">
+					<!-- <f:selectItem itemLabel="Telephone" itemValue="Telephone"/>
+					<f:selectItem itemLabel="Email" itemValue="Email"/>
+					<f:selectItem itemLabel="Post" itemValue="Post"/>  -->
+					<f:selectItems value="#{contactKindHandler.contactKinds}" />
+				</h:selectOneRadio>
+			</div>
+
+
+			<div class="row">
+				<div class="col-lg-12">
+					<h:commandButton action="#{contactController.showData()}"
+						value="Submit" styleClass="btn btn-success" />
+				</div>
+			</div>
+
+		</h:form>
+	</div>
+</body>
+</html>

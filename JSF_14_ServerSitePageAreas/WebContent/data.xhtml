@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<link rel="stylesheet" href="css/bootstrap.css"></link>
+	<link rel="stylesheet" href="css/bootstrap-theme.css"></link>
+</h:head>
+<body>
+	<script src="js/jquery3.2.1.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/npm.js"></script>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Feld</th>
+							<th>Wert</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Development</td>
+							<td>#{contactData.topicDev ? "Ja" : "Nein"}</td>
+						</tr>
+						<tr>
+							<td>Training</td>
+							<td>#{contactData.topicTraining? "Ja" : "Nein"}</td>
+						</tr>
+						<tr>
+							<td>Consulting</td>
+							<td>#{contactData.topicConsulting? "Ja" : "Nein"}</td>
+						</tr>
+						<tr>
+							<td>Anrede</td>
+							<td>#{contactData.salutation}</td>
+						</tr>
+						<tr>
+							<td>Name</td>
+							<td><h:outputFormat value="{0}, {1}">
+									<f:param value="#{contactData.lastName}"></f:param>
+									<f:param value="#{contactData.firstName}"></f:param>
+								</h:outputFormat></td>
+						</tr>
+						<tr>
+							<td>Email</td>
+							<td><h:outputLink value="mailto:#{contactData.email}">
+									<h:outputText value="#{contactData.email}" />
+								</h:outputLink></td>
+						</tr>
+						<tr>
+							<td>Telephone</td>
+							<td>#{contactData.phone}</td>
+						</tr>
+						<tr>
+							<td>Ihr Alter</td>
+							<td>#{contactData.age}</td>
+						</tr>
+						<tr>
+							<td>Nachricht</td>
+							<td>#{contactData.message}</td>
+						</tr>
+						<tr>
+							<td>Datum</td>
+							<td>
+								<h:outputText value="#{contactData.date}">
+									<f:convertDateTime pattern="dd.MM.yyyy" />
+								</h:outputText>
+							</td>
+						</tr>
+						<tr>
+							<td>Uhrzeit</td>
+							<td>#{contactData.time}</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+				<h:form>
+					<h:commandButton value="Go back!"
+						action="#{contactController.showInputData()}"
+						styleClass="btn btn-default"></h:commandButton>
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
